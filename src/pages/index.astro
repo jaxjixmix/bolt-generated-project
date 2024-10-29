@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from '@astrojs/image/components';
+
+// Mock data for news articles
+const latestNews = {
+  title: "Breaking: Major Scientific Discovery",
+  image: "https://via.placeholder.com/800x400",
+  summary: "Scientists have made a groundbreaking discovery that could change our understanding of the universe."
+};
+
+const currentNews = [
+  { title: "New Economic Policy Announced", image: "https://via.placeholder.com/400x200" },
+  { title: "Sports Team Wins Championship", image: "https://via.placeholder.com/400x200" },
+  { title: "Technology Giant Releases New Product", image: "https://via.placeholder.com/400x200" },
+];
+
+const trendingNews = [
+  "Climate Change Conference Begins",
+  "Celebrity Couple Announces Engagement",
+  "New Health Study Results Released",
+];
+---
+
+<Layout title="Astro News - Home">
+  <section class="mb-8">
+    <h1 class="text-3xl font-bold mb-4">Latest News</h1>
+    <div class="bg-gray-100 p-4 rounded-lg">
+      <Image src={latestNews.image} alt={latestNews.title} width={800} height={400} format="webp" class="w-full rounded-lg mb-4" />
+      <h2 class="text-2xl font-bold mb-2">{latestNews.title}</h2>
+      <p>{latestNews.summary}</p>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-2xl font-bold mb-4">Current News</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {currentNews.map((news) => (
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+          <Image src={news.image} alt={news.title} width={400} height={200} format="webp" class="w-full" />
+          <div class="p-4">
+            <h3 class="font-bold">{news.title}</h3>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-bold mb-4">Trending News</h2>
+    <ul class="list-disc list-inside">
+      {trendingNews.map((news) => (
+        <li>{news}</li>
+      ))}
+    </ul>
+  </section>
+</Layout>

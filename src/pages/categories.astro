@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const categories = [
+  "Politics",
+  "Technology",
+  "Sports",
+  "Entertainment",
+  "Science",
+  "Health",
+  "Business",
+  "World"
+];
+---
+
+<Layout title="Astro News - Categories">
+  <h1 class="text-3xl font-bold mb-6">News Categories</h1>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {categories.map((category) => (
+      <a href={`/category/${category.toLowerCase()}`} class="bg-blue-100 hover:bg-blue-200 p-4 rounded-lg text-center">
+        <h2 class="text-xl font-semibold">{category}</h2>
+      </a>
+    ))}
+  </div>
+</Layout>

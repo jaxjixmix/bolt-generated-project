@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from '@astrojs/image/components';
+
+export function getStaticPaths() {
+  return [
+    {params: {slug: 'about'}},
+    {params: {slug: 'terms'}},
+    {params: {slug: 'contact'}},
+    {params: {slug: 'news/example-article'}},
+  ];
+}
+
+const { slug } = Astro.params;
+
+let title = 'Page Not Found';
+let content = '<p>The requested page could not be found.</p>';
+
+if (slug === 'about') {
+  title = 'About Us';
+  content = '<p>Astro News is your trusted source for the latest news and information. Our team of dedicated journalists work tirelessly to bring you accurate and timely reporting on the stories that matter most.</p>';
+} else if (slug === 'terms') {
+  title = 'Terms of Service';
+  content = '<p>By using Astro News, you agree to our terms of service. These terms outline your rights and responsibilities as a user of our website.</p>';
+} else if (slug === 'contact') {
+  title = 'Contact Us';
+  content = '<p>Have a question or comment? We\'d love to hear from you. Please email us at contact@astronews.com or use the form below to get in touch.</p>';
+} else if (slug === 'news/example-article') {
+  title = 'Example News Article';
+  content = `
+    <Image src="https://via.placeholder.com/800x400" alt="Example News Image" width={800} height={400} format="webp" class="w-full rounded-lg mb-4" />
+    <p class="text-gray-600 mb-4">Published on May 1, 2023</p>
+    <p>This is an example of a full news article. It would contain the complete text of the news story, including details, quotes, and analysis.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc id aliquam tincidunt, nisl nunc tincidunt urna, id lacinia nunc nunc id lectus. Sed euismod, nunc id aliquam tincidunt, nisl nunc tincidunt urna, id lacinia nunc nunc id lectus.</p>
+  `;
+}
+---
+
+<Layout title={`Astro News - ${title}`}>
+  <h1 class="text-3xl font-bold mb-6">{title}</h1>
+  <div set:html={content} />
+</Layout>
